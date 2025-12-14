@@ -13,5 +13,4 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       - run: dotnet restore
-      - run: dotnet publish -o app -r ${{ matrix.rid }} --sc 
-/p:PublishSingleFile=true,AssemblyName=app
+      - run: dotnet publish -o app -r ${{ matrix.rid }} --sc /p:PublishSingleFile=true,AssemblyName=app
