@@ -13,9 +13,9 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       - run: dotnet restore
-      - run: dotnet publish -o app -r ${{ matrix.rid }} --sc /p:PublishSingleFile=true,AssemblyName=app
+      - run: dotnet publish -o app/${{ matrix.rid }} -r ${{ matrix.rid }} --sc /p:PublishSingleFile=true,AssemblyName=app
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: program-${{ matrix.rid }}
-          path: program/${{ matrix.rid }}
+          name: app-${{ matrix.rid }}
+          path: app/${{ matrix.rid }}
