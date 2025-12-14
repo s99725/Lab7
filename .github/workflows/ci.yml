@@ -6,12 +6,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
       - run: dotnet restore
       - run: dotnet build
+      - run: dotnet test
+      - run: dotnet publish -o app -r linux-x64 --sc /p:PublishSingleFile=true,AssemblyName=app
+      - run: tar cf app.tar app/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app.tar
+          path: app.tar
   test:
     steps:
-      - name: trying to run
-        run: dotnet run
+      - uses: actions/download-artifact@v4
+        with:
+          name: app.tar
+      - run: tar xf app.tar/app.tar
+      - run: ./app/app
