@@ -19,6 +19,7 @@ jobs:
           name: app.tar
           path: app.tar
   test:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
         with:
